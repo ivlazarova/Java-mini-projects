@@ -1,0 +1,46 @@
+import java.util.Random;
+import java.util.Scanner;
+
+class Main{
+    public static void main(String[] args){
+
+        Random random = new Random();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the beginning balance: ");
+        double startBalance = scanner.nextDouble();
+        System.out.print("Enter sum for a bet: ");
+        double bet = scanner.nextDouble();
+        System.out.print("Enter your guess for the sum (2-12): ");
+        int guess = scanner.nextInt();
+
+        int dice1 = random.nextInt(1,7);
+        int dice2 = random.nextInt(1,7);
+        int sum = dice1 + dice2;
+        double win = 0.0;
+        int difference = Math.abs(guess - sum);
+
+        if(guess == sum){
+            win += bet*5;
+            System.out.println("Perfect guess! You win: " + win);
+        }
+        else if(difference == 1){
+            win += bet*2;
+            System.out.println("Close guess! You win: " + win);
+        }
+        else{
+            win = 0.0;
+            System.out.println("You lost your bet!");
+        }
+
+        double newBallance = startBalance - bet + win;
+
+        System.out.println("You bet: " + bet + " on sum " + guess);
+        System.out.println("Dice one: " + dice1);
+        System.out.println("Dice two: " + dice2);
+        System.out.println("Sum: " + sum);
+        System.out.println("New balance: " + newBallance);
+
+        scanner.close();
+    }
+}
