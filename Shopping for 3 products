@@ -1,0 +1,68 @@
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter product one name: ");
+        String pr1 = scanner.nextLine();
+        System.out.print("Enter price per product one: ");
+        double price1 = scanner.nextDouble();
+        System.out.print("Enter quantity for product one: ");
+        int quant1 = scanner.nextInt();
+        scanner.nextLine();
+        
+        System.out.print("\nEnter product two name: ");
+        String pr2 = scanner.nextLine();
+        System.out.print("Enter price per product two: ");
+        double price2 = scanner.nextDouble();
+        System.out.print("Enter quantity for product two: ");
+        int quant2 = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("\nEnter product three name: ");
+        String pr3 = scanner.nextLine();
+        System.out.print("Enter price per product three: ");
+        double price3 = scanner.nextDouble();
+        System.out.print("Enter quantity for product three: ");
+        int quant3 = scanner.nextInt();
+
+        double subt1 = price1 * quant1;
+        double subt2 = price2 * quant2;
+        double subt3 = price3 * quant3;
+
+        double subTotal = subt1 + subt2 + subt3;
+        double total = 0.0;
+        double afterDisc = 0.0;
+        String discount = "";
+
+        if(subTotal > 50){
+            afterDisc = subTotal - subTotal * 0.1;
+            discount = "10%"; 
+        }
+        else if(subTotal >= 20 && subTotal <= 50){
+            afterDisc = subTotal - subTotal * 0.05;
+            discount = "5%";
+        }
+        else{
+            afterDisc = subTotal;
+            discount = "0%";
+        }
+
+        double vat = afterDisc * 0.2;
+        total = afterDisc + vat;
+
+        System.out.println("Product 1 (" + pr1 + "): " + subt1);
+        System.out.println("Product 2 (" + pr2 + "): " + subt2);
+        System.out.println("Product 3 (" + pr3 + "): " + subt3);
+        System.out.println("______________________________________________");
+        System.out.println("Subtotal: " + subTotal);
+        System.out.println("Discount: -" + discount);
+        System.out.println("After discount: " + afterDisc);
+        System.out.println("VAT (20%): " + vat);
+        System.out.printf("Total to pay: %.2f", total);
+
+        scanner.close();
+    }
+}
