@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+class Main{
+    public static void main(String[] args){
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the name of the student: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter grade one: ");
+        double grade1 = scanner.nextDouble();
+        System.out.print("Enter grade two: ");
+        double grade2 = scanner.nextDouble();
+        System.out.print("Enter grade three: ");
+        double grade3 = scanner.nextDouble();
+        System.out.print("Enter attendance: ");
+        int attendance = scanner.nextInt();
+
+        double average = (grade1 + grade2 + grade3)/3;
+
+        double attendancePercent = (attendance/30.0)*100;
+
+        String status = "";
+
+        if(average > 4.50){
+            if(attendancePercent > 90){
+                status="Excellent student! Eligible for a scholarship.";
+            }
+            else{
+                status="Great grades, but attendance needs improvement for scholarship eligibility.";
+            }
+        }
+        else if(average <= 4.50 && average > 3.00){
+            if(attendancePercent > 75){
+                status="Passing student, keep up the attendance.";
+            }
+            else{
+                status="Warning, low grades combined with low attendance, academic risk.";
+            }
+        }
+        else{
+            if(attendancePercent >50){
+                status="Failing grades despite decent attendance. Needs tutoring.";
+            }
+            else{
+                status="Critical, failing grades and very low attendance. Risk of expulsion.";
+            }
+        }
+
+        System.out.println("Student: " + name);
+        System.out.printf("Average grade: %.2f \n", average);
+        System.out.printf("Attendance: %d/30 (%.2f%%) \n", attendance, attendancePercent);
+        System.out.println("Status: " + status);
+        
+    }
+}
