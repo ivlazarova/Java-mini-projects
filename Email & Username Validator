@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+class Main{
+    public static void main(String[] args){
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter your first name: ");
+        String firstName = scanner.nextLine();
+        System.out.print("Enter your middle name: ");
+        String middleName = scanner.nextLine();
+        System.out.print("Enter your last name: ");
+        String lastName = scanner.nextLine();
+        System.out.print("Enter your email address: ");
+        String email = scanner.nextLine();
+        System.out.print("Enter your password: ");
+        String password = scanner.nextLine();
+
+        String initial1 = firstName.substring(0,1);
+        String initial2 = middleName.substring(0,1);
+        String initial3 = lastName.substring(0,1);
+
+        String abreviation = initial1 + initial2 + initial3;
+
+        if(email.contains("@")){
+            System.out.println("Your email is correct.");
+        }
+        else{
+            System.out.println("Invalid email. It must contain @.");
+        }
+
+        String domain = email.substring(email.indexOf("@"));
+        
+        if(email.endsWith(".bg")){
+            System.out.println("You have bulgarian email.");
+        }
+        else{
+            System.out.println("Your email is not bulgarian.");
+        }
+
+        if(password.length()<8){
+            System.out.println("Your password is too short. It must be more than 8 characters.");
+        }
+        else{
+            if(!password.equals(password.toLowerCase())){
+                System.out.println("You have very strong password.");
+            }
+            else{
+                System.out.println("Your password is very weak.");
+            }
+        }
+
+        String username = email.substring(0,email.indexOf("@"));
+
+        System.out.println("Full name: " + firstName + " " + middleName + " " + lastName);
+        System.out.println("Initials: " + abreviation);
+        System.out.println("Email: " + email);
+        System.out.println("Username: " + username);
+        System.out.println("Domain: " + domain);
+
+        scanner.close();
+    }
+}
