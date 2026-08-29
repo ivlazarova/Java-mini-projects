@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+class Main{
+    public static void main(String[] args){
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter your weigth: ");
+        double weight = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.print("Enter measure unit: ");
+        String measureUnit = scanner.nextLine();
+        System.out.print("Enter the wanted measure unit: ");
+        String wantedMeasureUnit = scanner.nextLine();
+
+        double weightInKg = 0.0;
+
+        if(measureUnit.equals("kg")){
+            weightInKg = weight * 1;
+        }
+        else if(measureUnit.equals("g")){
+            weightInKg = weight / 1000;
+        }
+        else if(measureUnit.equals("lb")){
+            weightInKg = weight * 0.453592;
+        }
+        else if(measureUnit.equals("oz")){
+            weightInKg = weight * 0.0283495;
+        }
+        else{
+            System.out.println("Error. Enter one of the other units.");
+        }
+
+        double result = 0.0;
+
+         if(wantedMeasureUnit.equals("kg")){
+            result = weightInKg;
+        }
+        else if(wantedMeasureUnit.equals("g")){
+            result = weightInKg * 1000;
+        }
+        else if(wantedMeasureUnit.equals("lb")){
+            result = weightInKg / 0.453592;
+        }
+        else if(wantedMeasureUnit.equals("oz")){
+            result = weightInKg / 0.0283495;
+        }
+        else{
+            System.out.println("Error. Enter one of the other units.");
+        }
+
+        System.out.printf("%.2f %s = %.2f %s \n", weight, measureUnit, result, wantedMeasureUnit);
+
+        scanner.close();
+    }
+}
