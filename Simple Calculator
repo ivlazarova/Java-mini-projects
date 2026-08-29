@@ -58,5 +58,7 @@ class Main{
         else{
             System.out.println("Error. Number 3 can't be negative for this operation.\n");
         }
+
+        scanner.close();
     }
 }
