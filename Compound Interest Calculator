@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+class Main{
+    public static void main(String[] args){
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter beginning sum: ");
+        double beginSum = scanner.nextDouble();
+        System.out.print("Enter year tax: ");
+        double yearTax = scanner.nextDouble();
+        System.out.print("Enter number of years: ");
+        int years = scanner.nextInt();
+        System.out.print("Enter yearly capitalization (1-yearly, 4-quarterly, 12-monthly): ");
+        int yearlyCapitaliz = scanner.nextInt();
+
+
+        double finalAmount = beginSum*Math.pow(1+(yearTax/100)/yearlyCapitaliz, yearlyCapitaliz*years);
+
+        double totalInterest = finalAmount - beginSum;
+
+        double simpleInterest = beginSum *(yearTax/100)*years;
+        double simpleFinalAmount = beginSum + simpleInterest;
+
+        double difference = totalInterest - simpleInterest;
+
+        System.out.printf("Principal: %.2f\n", beginSum);
+        System.out.printf("Rate: %.2f%%\n", yearTax);
+        System.out.printf("Time: %d years\n", years);
+        System.out.printf("Compound: %d times per years\n", yearlyCapitaliz);
+        System.out.printf("Compound interest final amount: %.2f\n", finalAmount);
+        System.out.printf("Total compound interest earned: %.2f\n", totalInterest);
+        System.out.printf("Simple interest final amount: %.2f\n", simpleFinalAmount);
+        System.out.printf("Total simple interest earned: %.2f\n", simpleInterest);
+        System.out.printf("Extra earned from compounding: %.2f\n", difference);
+    }
+}
