@@ -51,6 +51,8 @@ class Main{
         System.out.printf("Average grade: %.2f \n", average);
         System.out.printf("Attendance: %d/30 (%.2f%%) \n", attendance, attendancePercent);
         System.out.println("Status: " + status);
-        
+
+        scanner.close();
     }
+
 }
