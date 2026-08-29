@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+class Main{
+    public static void main(String[] args){
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter number one: ");
+        double num1 = scanner.nextDouble();
+        System.out.print("Enter number two: ");
+        double num2 = scanner.nextDouble();
+        System.out.print("Enter number three for square operation: ");
+        double num3 = scanner.nextDouble();
+        scanner.nextLine();
+
+        System.out.print("Enter operation (+,-,*,/,%,^): ");
+        String operation = scanner.nextLine();
+
+        double result = 0.0;
+
+        if((operation.equals("/") || operation.equals("%")) && num2 == 0){
+            System.out.println("Error. Division by zero is not imposible.\n");
+        }
+
+        if(operation.equals("+")){
+            result = num1 + num2;
+            System.out.printf("The result of addition is:%.2f\n ",result);
+        }
+        else if(operation.equals("-")){
+            result = num1 - num2;
+            System.out.printf("The result of subtraction is:%.2f\n ",result);
+        }
+        else if(operation.equals("*")){
+            result = num1 * num2;
+            System.out.printf("The result of multiplication is:%.2f\n ",result);
+        }
+        else if(operation.equals("/")){
+            result = num1 / num2;
+            System.out.printf("The result of division is:%.2f\n ",result);
+        }
+        else if(operation.equals("%")){
+            result = num1 % num2;
+            System.out.printf("The result of modulus is:%.2f\n ",result);
+        }
+        else if(operation.equals("^")){
+            result = Math.pow(num1,num2);
+            System.out.printf("The result of exponentiation is:%.2f\n ",result);
+        }
+        else{
+            System.out.println("Error. Invalid operator. Try again.\n");
+        }
+
+
+        if(num3 >= 0){
+            result = Math.sqrt(num3);
+            System.out.printf("The result of math square is: %.2f\n", result);
+        }
+        else{
+            System.out.println("Error. Number 3 can't be negative for this operation.\n");
+        }
+    }
+}
