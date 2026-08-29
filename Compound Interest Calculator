@@ -33,5 +33,7 @@ class Main{
         System.out.printf("Simple interest final amount: %.2f\n", simpleFinalAmount);
         System.out.printf("Total simple interest earned: %.2f\n", simpleInterest);
         System.out.printf("Extra earned from compounding: %.2f\n", difference);
+
+        scanner.close();
     }
 }
