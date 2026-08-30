@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+class Main{
+    public static void main(String[] args){
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the beginning balance: ");
+        double balance = scanner.nextDouble();
+        scanner.nextLine();
+        String command = "";
+
+        while(!command.equals("exit")){
+            System.out.println("1-Check balance");
+            System.out.println("2-Deposit money");
+            System.out.println("3-Withdraw money");
+            System.out.println("exit-Quit");
+            System.out.print("Choose one of the options: ");
+            command = scanner.nextLine();
+
+            if(command.equals("1")){
+                System.out.printf("Your balance is: %.2f euro\n", balance);
+            }
+            else if(command.equals("2")){
+                System.out.print("Enter the sum for depositing into your balance: ");
+                double deposit = scanner.nextDouble();
+                scanner.nextLine();
+                balance += deposit;
+                System.out.printf("The new balance in your account is: %.2f euro\n", balance);
+            }
+            else if(command.equals("3")){
+                System.out.print("Enter the sum for withdraw: ");
+                double withdraw = scanner.nextDouble();
+                scanner.nextLine();
+
+                if(withdraw > balance){
+                    System.out.println("Error. Insufficient funds.");
+                }
+                else{
+                    balance -= withdraw;
+                    System.out.printf("The new balance in your account is: %.2f euro\n", balance);
+                }
+            }
+            else if(command.equals("exit")){
+                System.out.println("Thank you for using our ATM. Goodbye!");
+            }
+            else{
+                System.out.println("Error. Invalid option. Try again.");
+            }
+        }
+
+        scanner.close();
+    }
+}
