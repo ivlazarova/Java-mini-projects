@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+class Main{
+    public static void main(String[] args){
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("1 - Pizza (12.50 euro)");
+        System.out.println("2 - Burger (9.90 euro)");
+        System.out.println("3 - Pasta (10.20 euro)");
+        System.out.println("4 - Salad (7.50 euro)");
+        System.out.println("5 - Soup (5.00 euro)");
+        System.out.print("Enter a number from the menu 1-5: ");
+        int number = scanner.nextInt();
+        System.out.print("Enter how many do you want from this dish: ");
+        int howMany = scanner.nextInt();
+        scanner.nextLine();
+        double total = 0.0;
+        double subtotal = 0.0;
+        System.out.print("Enter the payment method: ");
+        String payment = scanner.nextLine();
+        double perItem = 0.0;
+        String dishName = "";
+
+        switch(number){
+            case 1 -> {perItem = 12.50; dishName = "Pizza";}
+            case 2 -> {perItem = 9.90; dishName = "Burger";}
+            case 3 -> {perItem = 10.20; dishName = "Pasta";}
+            case 4 -> {perItem = 7.50; dishName = "Salad";}
+            case 5 -> {perItem = 5.00; dishName = "Soup";}
+            default -> {perItem = 0.0; dishName = "Unknown";}
+        }
+        subtotal = perItem * howMany;
+
+        switch(payment){
+            case "cash" -> total = subtotal;
+            case "card" -> total = subtotal + subtotal*0.015;
+            case "voucher" -> total = subtotal - subtotal*0.1;
+            default -> System.out.println("Error. Invalid payment method.");
+        }
+
+        System.out.printf("Order: %d.%s x%d \n",number,dishName, howMany);
+        System.out.printf("Price per item: %.2f euro.\n", perItem);
+        System.out.printf("Subtotal: %.2f \n", subtotal);
+        System.out.println("Payment method: " + payment);
+        System.out.printf("Final total: %.2f euro.\n", total);
+
+        scanner.close();
+    }
+}
