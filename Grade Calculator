@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args){
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter grade one: ");
+        double gr1 = scanner.nextDouble();
+        System.out.print("Enter grade two: ");
+        double gr2 = scanner.nextDouble();
+        System.out.print("Enter grade three: ");
+        double gr3 = scanner.nextDouble();
+
+        System.out.println("Student: " + name);
+
+        double average = averageGrade(gr1, gr2, gr3);
+        System.out.printf("The average of the three grades is: %.2f\n", average);
+
+        String letterGrade = getLetterGrade(average);
+        System.out.println("Grade: " + letterGrade);
+
+        boolean passed = isPassing(average);
+        System.out.println("The student passed? - " + passed);
+
+        scanner.close();
+    }
+
+    static double averageGrade(double gr1, double gr2, double gr3){
+        return (gr1 + gr2 + gr3) / 3;
+    }
+
+    static String getLetterGrade(double average){
+        if(average >= 5.50){
+            return "Excellent!";
+        }
+        else if(average >= 4.50 && average < 5.50){
+            return "Very good!";
+        }
+        else if(average >= 3.50 && average < 4.50){
+            return "Good";
+        }
+        else if(average >= 3.00 && average < 3.50){
+            return "Satifactory";
+        }
+        else{
+            return "Fail";
+        }
+    }
+
+    static boolean isPassing(double average){
+        return average >= 3.00;
+    }
+}
