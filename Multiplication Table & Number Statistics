@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+class Main{
+    public static void main(String [] args) throws InterruptedException{
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a number to see the multiplication table: ");
+        int number = scanner.nextInt();
+        int sum = 0;
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+        int evenCount = 0;
+
+        for(int i = 5; i>=0; i--){
+            System.out.println( i + " ");
+            Thread.sleep(1000);
+        }
+
+        if(number <= 0){
+            System.out.println("Error. The number must be positive.");
+        }
+        else{
+            for(int i = 1; i<= 10; i++){
+                int product = number * i;
+                System.out.println(number + " x " + i + " = " + product);
+                sum += product;
+                max = Math.max(max, product);
+                min = Math.min(min, product);
+                
+                if(product % 2 == 0){
+                    evenCount ++;
+                }
+
+        }
+
+            double average = sum / 10.0;
+
+        System.out.println("The sum of the products is: " + sum);
+        System.out.println("The maximum number of this sequence is: " + max);
+        System.out.println("The minimum number of this sequence is: " + min);
+        System.out.println("The number of even numbers in the sequence is: " + evenCount);
+        System.out.println("The average sum of the sequence of numbers is: " + average);
+        }
+
+
+        scanner.close();
+    }
+}
