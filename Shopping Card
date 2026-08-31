@@ -1,0 +1,81 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args){
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter your budget: ");
+        double budget = scanner.nextDouble();
+        System.out.print("Enter your wanted number of products: ");
+        int productsCount = scanner.nextInt();
+        scanner.nextLine();
+
+        double[] products = new double[productsCount];
+        String[] productNames = new String[productsCount];
+
+        for(int i=0; i<productsCount; i++){
+            System.out.printf("Enter the name of the " + (i+1) + " product: \n");
+            productNames[i] = scanner.nextLine();
+
+            System.out.printf("Enter the price of " + productNames[i] + ":");
+            products[i] = scanner.nextDouble();
+            scanner.nextLine();
+
+            if(products[i] <= 0){
+                System.out.printf("Warning - invalid price for " + productNames[i] + "\n");
+            }
+        }
+
+        double totalSum = 0.0;
+        double maxPrice = products[0];
+        String maxPriceName = productNames[0];
+        double minPrice = Double.MAX_VALUE;
+        String minPriceName = "";
+        int moreThanAverage = 0;
+
+        for(int i=0; i<productsCount; i++){
+            totalSum += products[i];
+
+            if(products[i] > maxPrice){
+                maxPrice = products[i];
+                maxPriceName = productNames[i];               
+            }
+
+            if(products[i] > 0){
+                if(products[i] < minPrice){
+                    minPrice = products[i];
+                    minPriceName = productNames[i];
+            }
+            }
+            else{
+                continue;
+            }
+
+            double average = products[i] / productsCount;
+            if(products[i] > average){
+                moreThanAverage++;
+            }
+
+        } 
+        
+        double spent = 0.0;
+        System.out.println("You can afford: ");
+
+        for(int i=0; i<productsCount; i++){
+            if(spent + products[i] <= budget){
+                spent += products[i];
+                System.out.print(productNames[i] + " \n");
+            }
+        }
+       
+        System.out.printf("Your budget is: %.2f \n", budget);
+        System.out.println("Your items are: " + productsCount);
+        System.out.printf("The most expensive product from your shopping card is: %s - %.2f euro\n", maxPriceName, maxPrice);
+        System.out.printf("The least expensive product from your shopping card is: %s - %.2f euro\n", minPriceName, minPrice);
+        System.out.println("The number of products with prices more than average is: " + moreThanAverage);
+        System.out.printf("The total sum for your products is: %.2f euro\n", totalSum);
+        System.out.printf("You have %.2f euro left." ,(budget - totalSum));
+        scanner.close();
+    }
+}
