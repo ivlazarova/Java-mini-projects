@@ -1,0 +1,74 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args){
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter your salary: ");
+        double salary = scanner.nextDouble();
+        System.out.print("Enter the rate for your work: ");
+        int rate = scanner.nextInt();
+        scanner.nextLine();
+
+        double bonus = calculateBonus(salary, rate);
+
+        String label = getPerformanceLabel(rate);
+        
+        System.out.print("Enter first name: ");
+        String firstName = scanner.nextLine();
+        System.out.print("Enter last name: ");
+        String lastName = scanner.nextLine();
+
+        String initial = getInitials(firstName, lastName);
+
+        double afterBonus = salary + bonus;
+        boolean isTopPerf =  isTopPerformer(rate, afterBonus);
+
+        System.out.printf("Your bonus is: %.2f \n", bonus);
+        System.out.println("Your performance is: " + label);
+        System.out.println("Your initials are: " + initial);
+        System.out.println("You are a top performer in your work - " + isTopPerf);
+        scanner.close();
+    }
+
+    static double calculateBonus(double salary, int rate){
+        double bonus = 0.0;
+
+        switch(rate){
+            case 5 -> bonus = salary * 0.20;
+            case 4 -> bonus = salary * 0.15;
+            case 3 -> bonus = salary * 0.10;
+            case 2 -> bonus = salary * 0.05;
+            case 1 -> bonus = 0;
+            default -> {bonus = 0; System.out.println("Error. Invalid rating.");}
+        }
+        return bonus;        
+    }
+
+    static String getPerformanceLabel(int rate){
+        String label = "";
+        for(int i=1;i<=rate; i++ ){
+            switch(rate){
+                case 5 -> label = "Outstanding";
+                case 4 -> label = "Exceeds Expectations";
+                case 3 -> label = "Meets Expectations";
+                case 2 -> label = "Needs Improvement";
+                case 1 -> label = "Unsatisfactory";
+                default -> label = "Invalid Rating";
+            }
+        }
+        return label;
+    }    
+
+    static String getInitials(String firstName, String lastName){
+        
+        String firstInitial = firstName.substring(0,1);
+        String lastInitial = lastName.substring(0,1);
+        return  firstInitial + " " + lastInitial;
+    }
+
+    static boolean isTopPerformer(int rate, double afterBonus){
+        return rate == 5 && afterBonus > 3000.0;
+    }
+}
