@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+public class Main{
+
+    static int totalAttempts = 0;
+
+    public static void main(String[] args){
+
+        Scanner scanner = new Scanner(System.in);
+
+        int attemptsLeft = 3;
+        int correctPin = 5902;
+        boolean accessGranted = false;
+
+        while(attemptsLeft > 0){
+            System.out.print("Enter your pin: ");
+            int enteredPin = scanner.nextInt();
+
+            boolean success = attemptAccess(enteredPin, correctPin);
+
+            if(success){
+                System.out.println("Access granted!");
+                accessGranted = true;
+                break;
+            }
+            else{
+                attemptsLeft --;
+                System.out.printf("You have %d attempts left.\n", attemptsLeft);
+            }
+
+            if(attemptsLeft == 1){
+                String warning = "Last attempt! Enter your correct pin!";
+                System.out.println(warning);
+            }
+
+        }
+
+        if(!accessGranted){
+            System.out.println("Access denied. Vault locked.");
+        }
+
+        System.out.println("Total access attempts recorded: " + totalAttempts);
+
+        scanner.close();
+    }
+
+    static boolean attemptAccess(int enteredPin, int correctPin){
+        boolean success = (enteredPin == correctPin);
+        totalAttempts ++;
+        return success;
+    }
+}
