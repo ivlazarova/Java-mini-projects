@@ -1,0 +1,66 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String [] args){
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of students: ");
+        int students = scanner.nextInt();
+
+        double[] grades = new double[students];
+
+
+        for(int i = 0; i<grades.length; i++){
+            System.out.print("Enter the grade for student " + (i+1) + ": ");
+            grades[i] = scanner.nextDouble();
+            
+            if(grades[i]<2.00 || grades[i]>6.00){
+                System.out.println("Warning - Invalid grade enteres, enter again" + (i+1));
+            }
+            
+        }
+
+        double sum = 0.0;
+        double maxGrade = grades[0];
+        double minGrade = grades[0];
+        int excellentCount = 0;
+
+        for(int i=0; i<grades.length; i++){
+            sum += grades[i];
+
+            if(grades[i] > maxGrade){
+                maxGrade = grades[i];
+            }
+
+            if(grades[i] < minGrade){
+                minGrade = grades[i];
+            }
+
+            if(grades[i] >= 5.50){
+                excellentCount++;
+            }
+        }
+
+        double average = sum/grades.length;
+
+        for(int i = 0; i<grades.length; i++){
+            
+            if(grades[i] >= 3.00){
+                System.out.println("Student " + (i+1) + ": " + grades[i] + " - passed");
+            }
+            else{
+                System.out.println("Student " + (i+1) + ": " + grades[i] + " - failed");
+            }
+        }
+
+        System.out.println("Number of students: " + students);
+        System.out.println("The sum for the students is: " + sum);
+        System.out.printf("Average grade: %.2f\n", average);
+        System.out.printf("Highest grade: %.2f\n", maxGrade);
+        System.out.printf("Lowest grade: %.2f\n", minGrade);
+        System.out.println("Number of excellent grades: " + excellentCount);
+
+        scanner.close();
+    }
+}
