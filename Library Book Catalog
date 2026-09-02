@@ -1,0 +1,77 @@
+ import java.util.Scanner;
+
+ public class Main{
+    public static void main(String[] args){
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter number of books: ");
+        int books = scanner.nextInt();
+        scanner.nextLine();
+
+        String[] bookNames = new String[books];
+        double[] prices = new double[books];
+        int[] copyBooks = new int[books];
+
+        for(int i=0; i<books; i++){
+
+            System.out.print("Enter the name of book " + (i+1) + ": ");
+            bookNames[i] = scanner.nextLine();
+
+            System.out.print("Enter the price of book " + bookNames[i] + ": ");
+            prices[i] = scanner.nextDouble();
+            scanner.nextLine();
+
+            System.out.print("Enter the copies of book " + bookNames[i] + ": ");
+            copyBooks[i] = scanner.nextInt();
+            scanner.nextLine();
+
+            if(prices[i] <= 0 || copyBooks[i]<0){
+                System.out.printf("Warning - invalid data for %s\n", bookNames[i]);
+            }
+
+        }
+
+        double totalValue = 0.0;
+        double maxPrice = prices[0];
+        String maxPriceName = "";
+        double minPrice = Double.MAX_VALUE;
+        String minPriceName = "";
+        int countCopy = 0;
+
+        for(int i=0; i<books; i++){
+            totalValue += (prices[i] * copyBooks[i]);
+
+            if(prices[i] > maxPrice){
+                maxPrice = prices[i];
+                maxPriceName = bookNames[i];
+            }
+
+            if(prices[i] < minPrice){
+                minPrice = prices[i];
+                minPriceName = bookNames[i];
+            }
+
+            if(copyBooks[i] > 0){
+                countCopy += copyBooks[i];
+            }
+        }
+
+        double average = totalValue / countCopy;
+        double aboveAverage = 0.0;
+        for(int i=0; i<books; i++){
+            if(prices[i] > average){
+                aboveAverage ++;
+            }
+        }
+
+        System.out.println("The total value of books is: " + totalValue);
+        System.out.printf("The most expensive book is %s, %.2f\n ", maxPriceName, maxPrice);
+        System.out.printf("The cheapest book is %s, %.2f\n ", minPriceName, minPrice);
+        System.out.println("The count of all books is: " + countCopy);
+        System.out.printf("The average sum for all of the books is: %.2f",average);
+        System.out.println("The books above average are: " + aboveAverage);
+
+        scanner.close();
+    }
+ }
