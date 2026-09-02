@@ -66,10 +66,10 @@
         }
 
         System.out.println("The total value of books is: " + totalValue);
-        System.out.printf("The most expensive book is %s, %.2f\n ", maxPriceName, maxPrice);
+        System.out.printf("The most expensive book is %s - %.2f\n ", maxPriceName, maxPrice);
         System.out.printf("The cheapest book is %s, %.2f\n ", minPriceName, minPrice);
         System.out.println("The count of all books is: " + countCopy);
-        System.out.printf("The average sum for all of the books is: %.2f",average);
+        System.out.printf("The average sum for all of the books is: %.2f\n",average);
         System.out.println("The books above average are: " + aboveAverage);
 
         scanner.close();
