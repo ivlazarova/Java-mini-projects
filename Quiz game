@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args){
+
+        Scanner scanner = new Scanner(System.in);
+
+        String[] questions = {
+            "On what TV network did The Vampire Diaries premiere in 2009?",
+            "What are the first names of the two Salvatore brothers?",
+            "Who is the first person turned into a vampire in Mystic Falls in season one, and who turns them?",
+            "Who is Klaus Mikaelson's first successful hybrid?",
+            "How old is Elena Gilbert when she and Stefan Salvatore first meet?"
+        };
+
+        String[][] options = {
+            {"1. NBC", "2. The CW", "3. ABC", "4. FOX"},
+            {"1. Klaus and Elijah", "2. Damon and Stefan", "3. Tyler and Matt", "4. Alaric and Jeremy"},
+            {"1. Caroline Forbes by Katherine", "2. Vicki Donovan by Damon Salvatore", "3. Tyler Lockwood by Klaus", "4. Jeremy Gilbert by Anna"},
+            {"1. Tyler Lockwood", "2. Stefan Salvatore", "3. Damon Salvatore", "4. Matt Donovan"},
+            {"1. 16", "2. 17", "3. 18", "4. 19"}
+        };
+
+        int guess = 0;
+        int correct = 0;
+
+        int[] correctAnswers = {2,2,2,1,2};
+
+        for(int i=0; i<questions.length; i++){
+            System.out.println(questions[i]);
+
+            for(String option : options[i]){
+                System.out.println(option);
+            }
+            System.out.println();
+            System.out.println();
+
+            System.out.print("Enter your guess: ");
+            guess = scanner.nextInt();
+
+            if(guess == correctAnswers[i]){
+                System.out.println("________________________");
+                System.out.println("Your answer is correct!");
+                System.out.println("________________________");
+                System.out.println();
+                correct++;
+                
+            }
+            else{
+                System.out.println("____________________________________________");
+                System.out.println("Your answer is wrong! The correct answer is: " + correctAnswers[i]);
+                System.out.println("___________________________________________");
+                System.out.println();
+            }
+        }
+        System.out.println("You have " + correct + " answers out of " + correctAnswers.length);
+
+        scanner.close();
+    }
+}
