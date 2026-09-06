@@ -1,0 +1,56 @@
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+        Student[] students = new Student[5];
+        Scanner scanner = new Scanner(System.in);
+        for(int i=0; i<students.length; i++){
+            System.out.print("Enter the name for student " + (i+1) + ": ");
+            String name = scanner.nextLine();
+            System.out.print("Enter the faculty number for student " + (i+1) + ": ");
+            int facultyNumber = scanner.nextInt();
+            System.out.print("ENter the average grade for student " + (i+1) + ": ");
+            double averageGrade = scanner.nextDouble();
+            scanner.nextLine();
+            students[i] = new Student(name, facultyNumber, averageGrade);
+        }
+        
+        int count = 1;
+        double sum = 0.0;
+        String highGradeName = "";
+        double highGrade = 0.0;
+        int excellentStudents = 0;
+        
+        for(Student student : students){
+ System.out.println();           System.out.println("Student " + count + ": " + student.name + ", Faculty number: " + student.facultyNumber + ", Average grade: " + student.averageGrade); 
+            count++;
+            sum += student.averageGrade;
+
+            if(student.averageGrade > highGrade){
+                highGrade = student.averageGrade;
+                highGradeName = student.name;
+            }
+
+            if(student.averageGrade >= 5.50){
+                excellentStudents++;
+            }
+        }
+        double average = sum/students.length;
+        System.out.println();
+        System.out.println("===== Statistic =====");
+        System.out.printf("The average grade for all of the students is: %.2f\n" + average);
+        System.out.println("Top student: " + highGradeName + " with average " + highGrade);
+        System.out.println("The number of excellent students is: " + excellentStudents);
+        
+        scanner.close();
+    }
+}
+public class Student{
+    String name;
+    int facultyNumber;
+    double averageGrade;
+    Student(String name, int facultyNumber, double averageGrade){
+        this.name = name;
+        this.facultyNumber = facultyNumber;
+        this.averageGrade = averageGrade;
+    }
+}
