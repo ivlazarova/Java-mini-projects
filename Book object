@@ -1,25 +1,8 @@
 public class Main{
     public static void main(String[] args){
-        Book book1 = new Book();
-        book1.title = "1984";
-        book1.author = "George Orwell";
-        book1.pages = 328;
-        book1.price = 15.99;
-        book1.isAvailable = true;
-
-        Book book2 = new Book();
-        book2.title = "Anna Karenina";
-        book2.author = "Leo Tolstoy";
-        book2.pages = 856;
-        book2.price = 18.99;
-        book2.isAvailable = true;
-
-        Book book3 = new Book();
-        book3.title = "Bible";
-        book3.author = "unknown";
-        book3.pages = 659;
-        book3.price = 21.02;
-        book3.isAvailable = false;
+        Book book1 = new Book("1984", "George Orwell", 328, 15.99, true);
+        Book book2 = new Book("Anna Karenina", "Leo Tolstoy", 856, 18.99, true);
+        Book book3 = new Book("Bible", "unknown", 659, 21.02, false); 
 
         System.out.println("Title: " + book1.title);
         System.out.println("Author: " + book1.author);
@@ -68,4 +51,20 @@ public class Book{
     int pages;
     double price;
     boolean isAvailable;
+
+    public Book(String title, String author, int pages, double price, boolean isAvailable){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+
+        if(price < 0){
+            System.out.println("Warning - negative price is not allowed");
+            this.price = 0.0;
+        }
+        else{
+            this.price = price;
+        }
+        
+        this.isAvailable = isAvailable;
+    }
 }
