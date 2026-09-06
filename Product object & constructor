@@ -1,0 +1,43 @@
+public class Main{
+    public static void main(String[] args){
+        Product pr1 = new Product("Laptop", 1200.00, 3);
+        Product pr2 = new Product("Mouse", 26.50);
+        Product pr3 = new Product("Unknown item");
+
+        System.out.println("Product: " + pr1.name + ", Price: " + pr1.price + ", Quantity: " + pr1.quantity);
+        System.out.println();
+        System.out.println("Product: " + pr2.name + ", Price: " + pr2.price + ", Quantity: " + pr2.quantity);
+        System.out.println();
+    System.out.println("Product: " + pr3.name + ", Price: " + pr3.price + ", Quantity: " + pr3.quantity);
+        System.out.println();
+
+        double totalValueProduct1 = pr1.price * pr1.quantity;
+        double totalValueProduct2 = pr2.price * pr2.quantity;
+        double totalValueProduct3 = pr3.price * pr3.quantity;
+        System.out.println("Total value for all of the produsts is: " + (totalValueProduct1 + totalValueProduct2 + totalValueProduct3));
+    }
+}
+
+public class Product{
+    String name;
+    double price;
+    int quantity;
+
+    Product(String name, double price, int quantity){
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    Product(String name, double price){
+        this.name = name;
+        this.price = price;
+        this.quantity = 0;
+    }
+
+    Product(String name){
+        this.name = name;
+        this.price = 0.0;
+        this.quantity = 0;
+    }
+}
