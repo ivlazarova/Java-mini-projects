@@ -1,0 +1,87 @@
+public class Main{
+    public static void main(String[] args){
+       Car car = new Car("Toyota", 45.0, 5);
+        Motorcycle motor = new Motorcycle("Yamaha", 25.0, true);
+        Bicycle bike = new Bicycle("Trek");
+
+        car.printInfo();
+        motor.printInfo();
+        bike.printInfo();
+        System.out.println();
+        car.rent();
+        motor.rent();
+        bike.rent();
+        System.out.println();
+        System.out.println("Car price: " + car.calculatePrice(5) + " euro.");
+        System.out.println("Motorcycle price: " + motor.calculatePrice(5) + " euro.");
+        System.out.println("Bicycle price: " + bike.calculatePrice(5) + " euro.");
+        System.out.println();
+        car.returnVehicle();
+        car.printInfo();
+    }
+}
+
+public class Vehicle{
+    String brand;
+    double pricePerDay;
+    boolean isRented;
+
+    Vehicle(String brand, double pricePerDay){
+        this.brand = brand;
+        this.pricePerDay = pricePerDay;
+        this.isRented = false;
+    }
+
+    void rent(){
+        isRented = true;
+        System.out.println(this.brand + " has been rented.");
+    }
+
+    void returnVehicle(){
+        isRented = false;
+        System.out.println(this.brand + " has been returned.");
+    }
+
+    double calculatePrice(int days){
+        return pricePerDay * days;
+    }
+
+    void printInfo(){
+        System.out.println("Brand: " + this.brand + " , Price per day: " + this.pricePerDay + " , Rented: " + this.isRented);
+    }
+}
+
+public class Car extends Vehicle{
+    int numberOfSeats;
+
+    Car(String brand, double pricePerDay, int numberOfSeats){
+        super(brand, pricePerDay);
+        this.numberOfSeats = numberOfSeats;
+    }
+
+    @Override 
+    double calculatePrice(int days){
+        return pricePerDay * days + 10 * days;
+    }
+}
+
+public class Motorcycle extends Vehicle{
+    boolean hasSidecar;
+
+    Motorcycle(String brand, double pricePerDay, boolean hasSidecar){
+        super(brand, pricePerDay);
+        this.hasSidecar = hasSidecar;
+    }
+
+    @Override
+    double calculatePrice(int days){
+        return (pricePerDay * days) * 0.85;
+    }
+}
+
+public class Bicycle extends Vehicle{
+
+    Bicycle(String brand){
+        super(brand, 5.0);
+    }
+}
