@@ -1,0 +1,76 @@
+public class Main{
+    public static void main(String[] args){
+
+        Manager manager = new Manager("Ivan Petrov", 1010, 2500.0, 6);
+        Developer developer = new Developer("Maria Ivanova", 102, 2200.0, 3000);
+        Intern intern = new Intern("Georgi Stoyanov", 103);
+
+        manager.printInfo();
+        developer.printInfo();
+        intern.printInfo();
+        System.out.println();
+        System.out.println(manager.calculateSalary());
+        System.out.println(developer.calculateSalary());
+        System.out.println(intern.calculateSalary());
+    }
+}
+
+public abstract class Employee{
+
+    String name;
+    int id;
+    double baseSalary;
+
+    Employee(String name, int id, double baseSalary){
+        this.name = name;
+        this.id = id;
+        this.baseSalary = baseSalary;
+    }
+
+    void printInfo(){
+        System.out.println("Name: " + this.name + " , Identifycation number: " + this.id + " , Base Salary: " + this.baseSalary);
+    }
+
+    abstract double calculateSalary();
+}
+
+public class Manager extends Employee{
+
+    int teamSize;
+
+    Manager(String name, int id, double baseSalary, int teamSize){
+        super(name, id, baseSalary);
+        this.teamSize = teamSize;
+    }
+
+    @Override
+    double calculateSalary(){
+        return baseSalary + teamSize * 200;
+    }
+}
+
+public class Developer extends Employee{
+
+    int linesOfCode;
+
+    Developer(String name, int id, double baseSalary, int linesOfCode){
+        super(name, id, baseSalary);
+        this.linesOfCode = linesOfCode;
+    }
+
+    @Override
+    double calculateSalary(){
+        return baseSalary + linesOfCode * 0.5;
+    }
+}
+
+public class Intern extends Employee{
+    Intern(String name, int id){
+        super(name, id, 800.0);
+    }
+
+    @Override
+    double calculateSalary(){
+        return baseSalary;
+    }
+}
