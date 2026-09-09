@@ -1,0 +1,111 @@
+
+public class Main{
+    public static void main(String[] args){
+
+        Song song = new Song ("Shape of you", "Ed Sheeran", 3.53);
+        song.play();
+        song.stop();
+        System.out.println("Duration of the song: " + song.getDuration());
+
+        Video video = new Video("Inception", "1080p", 148.0);
+        video.play();
+        video.stop();
+        System.out.println("Duration of the video: " + video.getDuration());
+
+        Podcast podcast = new Podcast("The liers", "Emma Wiliams", 105);
+        podcast.play();
+        podcast.stop();
+        System.out.println("Duration of the podcast: " + podcast.getDuration() + " minutes");
+    }
+}
+
+public interface Playable{
+
+    void play();
+
+    void stop();
+
+    double getDuration();
+}
+
+public class Song implements Playable{
+    String title;
+    String artist;
+    double durationMinutes;
+
+    Song(String title, String artist, double durationMinutes){
+        this.title = title;
+        this.artist = artist;
+        this.durationMinutes = durationMinutes;
+    }
+
+    @Override
+    public void play(){
+        System.out.println("Playing song: " + this.title + " by " + this.artist);
+    }
+
+    @Override
+    public void stop(){
+        System.out.println("Song stopped.");
+    }
+
+    @Override
+    public double getDuration(){
+        return durationMinutes;
+    }
+}
+
+
+public class Video implements Playable{
+    String title;
+    String resolution;
+    double durationMinutes;
+
+    Video(String title, String resolution, double durationMinutes){
+        this.title = title;
+        this.resolution = resolution;
+        this.durationMinutes = durationMinutes;
+    }
+
+    @Override 
+    public void play(){
+        System.out.println("Playing video: " + this.title + " in " + this.resolution + " resolution");
+    }
+
+    @Override
+    public void stop(){
+        System.out.println("Video stopped.");
+    }
+
+    @Override
+    public double getDuration(){
+        return durationMinutes;
+    }
+}
+
+public class Podcast implements Playable{
+    String episodeName;
+    String host;
+    double durationInMinutes;
+
+    Podcast(String episodeName, String host, double durationInMinutes){
+        this.episodeName = episodeName;
+        this.host = host;
+        this.durationInMinutes = durationInMinutes;
+    }
+
+    @Override 
+    public void play(){
+        System.out.println("The podcast - " + this.episodeName + " with host - " + this.host + " is playing.");
+    }
+
+    @Override
+    public void stop(){
+        System.out.println("Video stopped.");
+    }
+
+    @Override
+    public double getDuration(){
+        return durationInMinutes;
+    }
+}
