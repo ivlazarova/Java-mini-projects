@@ -1,0 +1,130 @@
+
+public class Main{
+    public static void main(String[] args){
+
+       PaymentMethod[] payments = new PaymentMethod[3];
+
+        payments[0] = new CreditCard("Ivan Petrov", 500.00, 2000.00);
+        payments[1] = new BankTransfer("Maria Ivanova", 300.00, "UniCredit Bulbank");
+        payments[2] = new DigitalWallet("Georgi Dimitrov", 150.00, "Revolut");
+
+        for(PaymentMethod payment : payments){
+            payment.processPayment(100.00);
+
+            System.out.println("The account is to: " + payment.getAccountHolder());
+            System.out.println("The new balance is: " + payment.getBalance());
+            }
+        System.out.println("Attempting a larger payment with digital wallet:");
+            boolean result = payments[2].processPayment(1000.00);
+            System.out.println("Successful payment: " + result);
+
+            System.out.println("Transaction counts: ");
+            for(PaymentMethod payment2 : payments){
+                System.out.println(payment2.getAccountHolder() + ": " + payment2.getTransactionCount() + " transactions");
+        }
+    }
+}
+
+interface Payable{
+    boolean processPayment(double amount);
+    double calculateFee(double amount);
+}
+
+abstract class PaymentMethod implements Payable{
+    private String accountHolder;
+    private double balance;
+    private int transactionCount;
+
+    PaymentMethod(String accountHolder, double balance){
+        this.accountHolder = accountHolder;
+        this.balance = balance;
+        this.transactionCount = 0;
+    }
+
+    public String getAccountHolder(){
+        return accountHolder;
+    }
+
+    public void setAccountHolder(String accountHolder){
+        this.accountHolder = accountHolder;
+    }
+
+    public double getBalance(){
+        return balance;
+    }
+
+    public void setBalance(double balance){
+        this.balance = balance;
+    }
+
+    public int getTransactionCount(){
+        return transactionCount;
+    }
+
+    public void setTransactionCount(int transactionCount){
+        this.transactionCount = transactionCount;
+    }
+
+    public boolean processPayment(double amount){
+        double fee = calculateFee(amount);
+        double totalCost = amount + fee;
+
+        if(totalCost <= balance){
+            balance -= totalCost;
+            transactionCount++;
+            System.out.println("Payment of " + amount + " successful. Fee: " + fee);
+            return true;
+        }
+        else{
+            System.out.println("Payment failed. Insufficient balance.");
+            return false;
+        }
+    }
+
+    public abstract double calculateFee(double amount);
+}
+
+public class CreditCard extends PaymentMethod{
+
+    private double creditLimit;
+    
+    CreditCard(String accountHolder, double balance, double creditLimit){
+        super(accountHolder, balance);
+        this.creditLimit = creditLimit;
+    }
+
+    @Override
+    public double calculateFee(double amount){
+      return amount * 0.025;  
+    }
+}
+
+public class BankTransfer extends PaymentMethod{
+
+    private String bankName;
+
+    BankTransfer(String accountHolder, double balance, String bankName){
+        super(accountHolder, balance);
+        this.bankName = bankName;
+    }
+
+    @Override
+    public double calculateFee(double amount){
+        return 1.50;
+    }
+}
+
+public class DigitalWallet extends PaymentMethod{
+
+    private String walletProvider;
+
+    DigitalWallet(String accountHolder, double balance, String walletProvider){
+        super(accountHolder, balance);
+        this.walletProvider = walletProvider;
+    }
+
+    @Override
+    public double calculateFee(double amount){
+        return 0.0;
+    }
+}
