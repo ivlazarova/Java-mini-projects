@@ -1,0 +1,118 @@
+public class Main{
+    public static void main(String[] args){
+
+        SmartDevice[] devices = new SmartDevice[3];
+        devices[0] = new SmartBulb("Living room light", 10.0, 80);
+        devices[1] = new SmartThermostat("Main Thermostat", 1500.0, 21.5);
+        devices[2] = new SmartBulb("Bedroom light", 8.0, 50);
+
+        double totalMontlyPrice = 0.0;
+
+        for(SmartDevice device : devices ){
+            device.turnOn();
+            System.out.printf("Your montly cost is: %.2f \n", device.calculateMontlyCost());
+            System.out.println();
+
+            System.out.println(device.getDeviceName());
+            totalMontlyPrice += device.calculateMontlyCost();            
+        }
+        System.out.printf("Your total cost for all of your devices is: %.2f \n", totalMontlyPrice);
+
+        devices[0].turnOff();
+        System.out.println(devices[0].getDeviceName() + " is on: " + devices[0].getIsOn());
+    }
+}
+
+interface Controllable{
+    void turnOn();
+    void turnOff();
+    double calculateMontlyCost();
+}
+
+public abstract class SmartDevice implements Controllable{
+    private String deviceName;
+    private boolean isOn;
+    private double powerConsumption;
+
+    SmartDevice(String deviceName, double powerConsumption){
+        this.deviceName = deviceName; 
+        this.isOn = false;
+        this.powerConsumption = powerConsumption; 
+    }
+
+    public String getDeviceName(){
+        return deviceName;
+    }
+
+    public void setDeviceName(String deviceName){
+        this.deviceName = deviceName;
+    }
+
+    public boolean getIsOn(){
+        return isOn;
+    }
+
+    public void setIsOn(boolean isOn){
+        this.isOn = isOn;
+    }
+
+    public double getPowerConsumption(){
+        return powerConsumption;
+    }
+
+    public void setPowerConsumption(double powerConsumption){
+        this.powerConsumption = powerConsumption;
+    }
+
+    public abstract double calculateMontlyCost();
+
+    public void turnOn(){
+        if(!isOn){
+            isOn = true;
+            System.out.println(deviceName + " has been turned on.");
+        }
+        else{
+            System.out.println(deviceName + " is already on!");
+        }
+    }
+
+    public void turnOff(){
+        if(isOn){
+            isOn = false;
+            System.out.println(deviceName + " has been turned off.");
+        }
+        else{
+            System.out.println(deviceName + " is already off.");
+        }
+    }
+}
+
+public class SmartBulb extends SmartDevice{
+
+    private int brightness;
+
+    SmartBulb(String deviceName, double powerConsumption, int brightness){
+        super(deviceName, powerConsumption);
+        this.brightness = brightness;
+    }
+
+    @Override
+    public double calculateMontlyCost(){
+        return ((getPowerConsumption() / 1000) * 0.20 * (brightness / 100.00 ) * 720);
+    }
+}
+
+public class SmartThermostat extends SmartDevice{
+
+    private double targetTempreture;
+
+    SmartThermostat(String deviceName, double powerConsumption, double targetTempreture){
+        super(deviceName, powerConsumption);
+        this.targetTempreture = targetTempreture;
+    }
+
+    @Override
+    public double calculateMontlyCost(){
+        return ( (getPowerConsumption() / 1000)  * 0.20 * 720);
+    }
+}
