@@ -1,0 +1,76 @@
+import java.util.ArrayList;
+
+public class Main{
+    public static void main(String[] args){
+
+        ArrayList<Product> products = new ArrayList<>();
+
+        products.add(new Product("Laptop", 1500, 2));
+        products.add(new Product("Keyboard", 25.62, 3));
+        products.add(new Product("Touch pen", 45.20, 1));
+
+        for(Product product : products){
+            System.out.println(product.displayInfo());
+        }
+    }
+}
+
+public class Product{
+
+    private String name;
+    private double price;
+    private int quantity;
+
+    Product(String name, double price, int quantity){
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    String getName(){
+        return this.name;
+    }
+
+    void setName(String name){
+        if(name == null || name.isEmpty()){
+            System.out.println("Name cannot be empty.");
+        }
+        else{
+            this.name = name;
+        }
+    }
+
+    double getPrice(){
+        return this.price;
+    }
+
+    void setPrice(double price){
+        if(price < 0){
+            System.out.println("Price cannot be negative.");
+        }
+        else{
+            this.price = price;
+        }
+    }
+
+    int getQuantity(){
+        return this.quantity;
+    }
+
+    void setQuantity(int quantity){
+        if(quantity < 0){
+            System.out.println("QUantity cannot be negative.");
+        }
+        else{
+            this.quantity = quantity;
+        }
+    }
+
+    double getTotalValue(){
+        return (price * quantity);
+    }
+
+    String displayInfo(){
+        return this.name + " - Price: " + this.price + ", Quantity: " + this.quantity + ", Total value: " + getTotalValue();
+    }
+}
