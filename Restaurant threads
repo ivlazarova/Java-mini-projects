@@ -1,0 +1,43 @@
+
+class Main {
+    public static void main(String[] args) {
+
+        Chef ch1 = new Chef("Mr.Petrov", "Ratatui", 6);
+        Chef ch2 = new Chef("Mrs.Ivanova", "Soup", 4);
+        Chef ch3 = new Chef("Ms.Georgieva", "Taratour", 2);
+
+        Thread thread1 = new Thread(ch1);
+        Thread thread2 = new Thread(ch2);
+        Thread thread3 = new Thread(ch3);
+        thread1.start();
+        thread2.start();
+        thread3.start();
+    }
+}
+
+class Chef implements Runnable{
+
+    String chefName;
+    String dishName;
+    int cookingTime;
+
+    Chef(String chefName, String dishName, int cookingTime){
+        this.chefName = chefName;
+        this.dishName = dishName;
+        this.cookingTime = cookingTime;
+    }
+
+    @Override
+    public void run(){
+
+        for(int i=cookingTime; i>0; i--){
+            try{
+                Thread.sleep(1000);
+            }
+            catch(InterruptedException e){
+                System.out.println(chefName + " was interrupted.");
+            }
+        }
+        System.out.println(chefName + " finished cooking " + dishName + ".");
+    }
+}
