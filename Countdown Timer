@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+
+        CountdownTimer ct1 = new CountdownTimer("Timer 1", 5);
+        CountdownTimer ct2 = new CountdownTimer("Timer 2", 3);
+
+        Thread thread1 = new Thread(ct1);
+        Thread thread2 = new Thread(ct2);
+        thread1.setDaemon(true);
+        thread1.start();
+        thread2.start();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your name: ");
+        String name = scanner.nextLine();
+        System.out.println("Hello " + name + " !Nice to meet you.");
+
+        scanner.close();
+    }
+}
+
+public class CountdownTimer implements Runnable{
+
+    String name;
+    int seconds;
+
+    CountdownTimer(String name, int seconds){
+        this.name = name;
+        this.seconds = seconds;
+    }
+
+    @Override
+    public void run(){
+        for(int i=seconds; i>0; i--){
+            // System.out.println(name + ": " + i + " seconds left.");
+
+            try{
+                Thread.sleep(1000);
+            }
+            catch(InterruptedException e){
+                System.out.println(name + " was interrupted.");
+            }
+        }
+        System.out.println(name + " finished!");
+    }
+}
