@@ -1,0 +1,73 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the speed for Speed: ");
+        int speedH1 = scanner.nextInt();
+        System.out.print("Enter the distance for Speed: ");
+        int distanceH1 = scanner.nextInt();
+        System.out.print("Enter the speed for Butter: ");
+        int speedH2 = scanner.nextInt();
+        System.out.print("Enter the distance for Butter: ");
+        int distanceH2 = scanner.nextInt();
+        System.out.print("Enter the speed for Space: ");
+        int speedH3 = scanner.nextInt();
+        System.out.print("Enter the distance for Space: ");
+        int distanceH3 = scanner.nextInt();
+        
+        Horse horse1 = new Horse("Speed", speedH1, distanceH1);
+        Horse horse2 = new Horse("Butter", speedH2, distanceH2);
+        Horse horse3 = new Horse("Space", speedH3, distanceH3);
+
+        Thread thread1 = new Thread(horse1);
+        Thread thread2 = new Thread(horse2);
+        Thread thread3 = new Thread(horse3);
+
+        thread1.start();
+        thread2.start();
+        thread3.start();
+
+        try{
+            thread1.join();
+            thread2.join();
+            thread3.join();
+        }
+        catch(InterruptedException e){
+            System.out.println("Main thread was interrupted.");
+        }
+
+        System.out.println("The race has ended.");
+
+        scanner.close();
+    }
+}
+
+class Horse implements Runnable{
+
+    String name;
+    int speed;
+    int distance;
+
+    Horse(String name, int speed, int distance){
+        this.name = name;
+        this.speed = speed;
+        this.distance = distance;
+    }
+
+    @Override
+    public void run(){
+        for(int i=1; i<distance; i++){
+
+            try{
+                Thread.sleep(speed);
+            }
+            catch(InterruptedException e){
+                System.out.println("The thread was interrupted.");
+            }
+        }
+        System.out.println(name + " has finished the race.");
+    }
+}
